@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <main class="container">
+    <section class="page-content">
+      <h1>Settings</h1>
+
+      <div class="settings-section">
+        <h3>Account Settings</h3>
+        <form class="settings-form">
+          <div class="form-group">
+            <label for="notifications">Email Notifications:</label>
+            <input type="checkbox" id="notifications" name="notifications" checked>
+          </div>
+
+          <div class="form-group">
+            <label for="privacy">Profile Visibility:</label>
+            <select id="privacy" name="privacy">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+          <a href="/dashboard" class="btn btn-outline">Back to Dashboard</a>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
