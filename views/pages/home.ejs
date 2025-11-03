@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to Bez Website</h1>
+      <p>A modern Node.js/Express web application</p>
+      <div class="hero-buttons">
+        <% if (!user) { %>
+          <a href="/auth/register" class="btn btn-primary btn-lg">Get Started</a>
+          <a href="/auth/login" class="btn btn-outline btn-lg">Login</a>
+        <% } else { %>
+          <a href="/dashboard" class="btn btn-primary btn-lg">Go to Dashboard</a>
+        <% } %>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>User Authentication</h3>
+          <p>Secure login and registration system</p>
+        </div>
+        <div class="feature-card">
+          <h3>Dashboard</h3>
+          <p>Personalized user dashboard</p>
+        </div>
+        <div class="feature-card">
+          <h3>Responsive Design</h3>
+          <p>Works great on all devices</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <main class="container">
+    <section class="error-section">
+      <h1 class="error-code">500</h1>
+      <h2>Internal Server Error</h2>
+      <p>Something went wrong. Please try again later.</p>
+
+      <% if (error && error.message) { %>
+        <div class="error-details">
+          <p><strong>Error:</strong> <%= error.message %></p>
+          <% if (error.stack) { %>
+            <pre><%= error.stack %></pre>
+          <% } %>
+        </div>
+      <% } %>
+
+      <a href="/" class="btn btn-primary">Go Home</a>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
