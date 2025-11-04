@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Youtube - <%= title || 'Bez Website' %></title>
+    <link rel="stylesheet" href="/youtube-research/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for navigation link */
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .back-to-home:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-to-home">← Quay lại trang chủ</a>
+
+    <div class="background-animation">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="12" fill="url(#gradient)"/>
+                    <path d="M19.5 15.5L32.5 24L19.5 32.5V15.5Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF0000"/>
+                            <stop offset="1" stop-color="#CC0000"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1>Công Cụ Phân Tích Kênh YouTube</h1>
+            <p class="subtitle">Phân tích chi tiết kênh YouTube và top video với dữ liệu chính xác</p>
+        </div>
+
+        <div class="card">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="api-key">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2C8.34 2 7 3.34 7 5C7 6.66 8.34 8 10 8C11.66 8 13 6.66 13 5C13 3.34 11.66 2 10 2ZM10 14C7.33 14 2 15.34 2 18V20H18V18C18 15.34 12.67 14 10 14Z" fill="currentColor"/>
+                        </svg>
+                        API Key của bạn
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="api-key" placeholder="Nhập API Key từ Google Cloud Console">
+                        <button type="button" class="toggle-password" id="toggle-api-key">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 4C5 4 1.73 7.11 1 10c.73 2.89 4 6 9 6s8.27-3.11 9-6c-.73-2.89-4-6-9-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <small class="help-text">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.75H7.25V7.25H8.75V11.75ZM8.75 5.75H7.25V4.25H8.75V5.75Z" fill="currentColor"/>
+                        </svg>
+                        Lấy API Key miễn phí tại <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>
+                    </small>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-button active" data-tab="filter">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.5 6.5h11M7 10h6M9 13.5h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        Lọc Kênh
+                    </button>
+                    <button class="tab-button" data-tab="analyze">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H17C18.1 3 19 3.9 19 5V15C19 16.1 18.1 17 17 17H3C1.9 17 1 16.1 1 15V5C1 3.9 1.9 3 3 3ZM3 7L10 11L17 7V5L10 9L3 5V7Z" fill="currentColor"/>
+                        </svg>
+                        Phân Tích Sâu
+                    </button>
+                </div>
+
+                <!-- Tab 1: Filter Channels -->
+                <div id="filter-tab" class="tab-content active">
+                    <div class="form-group">
+                        <label for="filter-keywords">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.5 14.5l4 4M9.5 16a6.5 6.5 0 100-13 6.5 6.5 0 000 13z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            Từ khóa tìm kiếm
+                        </label>
+                        <textarea id="filter-keywords" rows="3" placeholder="Nhập từ khóa (mỗi từ khóa một dòng hoặc phân cách bằng dấu phẩy)&#10;&#10;Ví dụ: tech review, gaming, cooking"></textarea>
+                        <small class="help-text">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.75H7.25V7.25H8.75V11.75ZM8.75 5.75H7.25V4.25H8.75V5.75Z" fill="currentColor"/>
+                            </svg>
+                            Hệ thống sẽ tìm kiếm kênh phù hợp với từ khóa hoặc cùng ngách
+                        </small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="min-subscribers">Số lượt sub tối thiểu</label>
+                            <input type="number" id="min-subscribers" value="1000" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label for="min-videos">Số video public tối thiểu</label>
+                            <input type="number" id="min-videos" value="10" min="0" step="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country-filter">Quốc gia</label>
+                        <select id="country-filter">
+                            <option value="US">Hoa Kỳ (USA)</option>
+                            <option value="GB">Vương quốc Anh (UK)</option>
+                            <option value="CA">Canada</option>
+                            <option value="AU">Úc (Australia)</option>
+                            <option value="VN">Việt Nam</option>
+                            <option value="IN">Ấn Độ (India)</option>
+                            <option value="JP">Nhật Bản (Japan)</option>
+                            <option value="KR">Hàn Quốc (South Korea)</option>
+                            <option value="ALL">Tất cả quốc gia</option>
+                        </select>
+                    </div>
+
+                    <button id="filter-submit-btn" class="submit-button">
+                        <span class="button-content">
+                            <svg class="button-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.5 6.5h11M7 10h6M9 13.5h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            <span class="button-text">Lọc Kênh & Tải Kết Quả</span>
+                        </span>
+                        <div class="spinner" id="filter-loading"></div>
+                    </button>
+
+                    <div id="filter-success-message" class="success-message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/>
+                        </svg>
+                        <div>
+                            <strong>Thành công!</strong>
+                            <p id="filter-success-text">Đã tải xuống file CSV chứa dữ liệu kênh</p>
+                        </div>
+                    </div>
+
+                    <div id="filter-error-message" class="error-message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+                        </svg>
+                        <div>
+                            <strong>Lỗi!</strong>
+                            <p id="filter-error-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Deep Analysis -->
+                <div id="analyze-tab" class="tab-content">
+                    <div class="form-group">
+                        <label for="channel-list">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 3H17C18.1 3 19 3.9 19 5V15C19 16.1 18.1 17 17 17H3C1.9 17 1 16.1 1 15V5C1 3.9 1.9 3 3 3ZM3 7L10 11L17 7V5L10 9L3 5V7Z" fill="currentColor"/>
+                            </svg>
+                            Danh sách kênh YouTube
+                        </label>
+                        <textarea id="channel-list" rows="8" placeholder="Nhập URL hoặc ID kênh (mỗi kênh một dòng)&#10;&#10;Ví dụ:&#10;https://www.youtube.com/@MrBeast&#10;https://www.youtube.com/channel/UCX6OQ3DkcsbYNE6H8uQQuVA&#10;UCv_t5tB0j0SQLNso0bl-2MA"></textarea>
+                        <small class="help-text">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM8.75 11.75H7.25V7.25H8.75V11.75ZM8.75 5.75H7.25V4.25H8.75V5.75Z" fill="currentColor"/>
+                            </svg>
+                            Hỗ trợ URL kênh, handle (@username), hoặc Channel ID
+                        </small>
+                    </div>
+
+                    <button id="submit-btn" class="submit-button">
+                        <span class="button-content">
+                            <svg class="button-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 2C8.34 2 7 3.34 7 5C7 6.66 8.34 8 10 8C11.66 8 13 6.66 13 5C13 3.34 11.66 2 10 2ZM10 14C7.33 14 2 15.34 2 18V20H18V18C18 15.34 12.67 14 10 14Z" fill="currentColor"/>
+                            </svg>
+                            <span class="button-text">Phân Tích & Tải Kết Quả</span>
+                        </span>
+                        <div class="spinner" id="loading"></div>
+                    </button>
+
+                    <div id="success-message" class="success-message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/>
+                        </svg>
+                        <div>
+                            <strong>Thành công!</strong>
+                            <p>Đã tải xuống 2 file CSV chứa dữ liệu phân tích</p>
+                        </div>
+                    </div>
+
+                    <div id="error-message" class="error-message">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+                        </svg>
+                        <div>
+                            <strong>Lỗi!</strong>
+                            <p id="error-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h3>Dữ liệu chi tiết</h3>
+                <p>Phân tích sâu về subscribers, views, và video performance</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Xử lý nhanh</h3>
+                <p>Tối ưu hóa API calls để xử lý nhiều kênh cùng lúc</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📥</div>
+                <h3>Export CSV</h3>
+                <p>Tải xuống dữ liệu dưới dạng CSV để phân tích thêm</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Phát triển với Express.js & YouTube Data API v3</p>
+        </div>
+    </div>
+
+    <script src="/youtube-research/script.js"></script>
+    <script src="/youtube-research/filter.js"></script>
+</body>
+</html>
