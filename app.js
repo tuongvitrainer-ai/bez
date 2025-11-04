@@ -9,6 +9,7 @@ const app = express();
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
+const youtubeResearchRoutes = require('./routes/youtube-research');
 
 // View engine setup
 app.set('view engine', 'ejs');
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
+app.use('/tools/research-youtube', youtubeResearchRoutes);
 
 // 404 handler
 app.use((req, res) => {
