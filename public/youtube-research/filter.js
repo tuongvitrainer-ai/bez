@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minSubscribersInput = document.getElementById('min-subscribers');
     const minVideosInput = document.getElementById('min-videos');
     const countryFilterSelect = document.getElementById('country-filter');
+    const languageFilterSelect = document.getElementById('language-filter');
     const filterSubmitBtn = document.getElementById('filter-submit-btn');
     const filterButtonContent = filterSubmitBtn.querySelector('.button-content');
 
@@ -78,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const minSubscribers = minSubscribersInput.value;
         const minVideos = minVideosInput.value;
         const country = countryFilterSelect.value;
+        const language = languageFilterSelect.value;
 
         // Hide previous messages
         showFilterMessage('hide');
@@ -109,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     keywords: keywords,
                     minSubscribers: minSubscribers,
                     minVideos: minVideos,
-                    country: country
+                    country: country,
+                    language: language
                 }),
             });
 
