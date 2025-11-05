@@ -159,7 +159,7 @@ async function getBasicChannelInfo(channelId, apiKey) {
 }
 
 // Helper function to search channels by keyword
-async function searchChannelsByKeyword(keyword, apiKey, maxResults = 100, minSubscribers = 1000, minVideos = 10, country = 'US') {
+async function searchChannelsByKeyword(keyword, apiKey, maxResults = 100, minSubscribers = 1000, minVideos = 10, country = 'US', language = 'en') {
     const allChannels = [];
     const seenChannelIds = new Set();
     let nextPageToken = null;
@@ -183,6 +183,10 @@ async function searchChannelsByKeyword(keyword, apiKey, maxResults = 100, minSub
                 params.regionCode = country;
             }
 
+            if (language) {
+                params.relevanceLanguage = language;
+            }
+
             const response = await axios.get('https://www.googleapis.com/youtube/v3/search', { params });
             const items = response.data.items || [];
 
@@ -198,7 +202,8 @@ async function searchChannelsByKeyword(keyword, apiKey, maxResults = 100, minSub
 
                 if (channelInfo &&
                     channelInfo['Subscribers'] >= minSubscribers &&
-                    channelInfo['Total Videos'] >= minVideos) {
+                    channelInfo['Total Videos'] >= minVideos &&
+                    (country === 'ALL' || !country || channelInfo['Country'] === country || channelInfo['Country'] === 'Không rõ')) {
                     allChannels.push(channelInfo);
                     seenChannelIds.add(channelId);
                     totalFetched++;
@@ -424,7 +429,7 @@ router.post('/api/analyze', async (req, res) => {
 // API Route: Filter channels
 router.post('/api/run-filter', async (req, res) => {
     try {
-        const { apiKey, keywords, minSubscribers, minVideos, country } = req.body;
+        const { apiKey, keywords, minSubscribers, minVideos, country, language } = req.body;
 
         if (!apiKey) {
             return res.status(400).json({ error: 'Vui lòng nhập API Key' });
@@ -455,7 +460,8 @@ router.post('/api/run-filter', async (req, res) => {
                 100,
                 parseInt(minSubscribers) || 1000,
                 parseInt(minVideos) || 10,
-                country || 'US'
+                country || 'US',
+                language || 'en'
             );
 
             // Remove duplicates
