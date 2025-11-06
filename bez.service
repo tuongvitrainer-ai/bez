@@ -1,0 +1,58 @@
+# ============================================
+# Systemd Service cho Bez Node.js Application
+# ============================================
+#
+# Cài đặt:
+# 1. Copy file này vào /etc/systemd/system/:
+#    sudo cp bez.service /etc/systemd/system/
+#
+# 2. Reload systemd:
+#    sudo systemctl daemon-reload
+#
+# 3. Enable service (tự động start khi boot):
+#    sudo systemctl enable bez
+#
+# 4. Start service:
+#    sudo systemctl start bez
+#
+# 5. Kiểm tra status:
+#    sudo systemctl status bez
+#
+# ============================================
+
+[Unit]
+Description=Bez Website - Node.js Application
+Documentation=https://github.com/tuongvitrainer-ai/bez
+After=network.target
+
+[Service]
+Type=simple
+User=user
+WorkingDirectory=/home/user/bez
+Environment="NODE_ENV=production"
+Environment="PORT=3000"
+
+# Load environment variables from .env file
+EnvironmentFile=-/home/user/bez/.env
+
+# Start command
+ExecStart=/usr/bin/node /home/user/bez/index.js
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=bez
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Resource limits
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
